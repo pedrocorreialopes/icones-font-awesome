@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Font Awesome Icon Search - Teste</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ccc; }
+        .success { color: green; }
+        .error { color: red; }
+        .test-result { margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <h1>Testes do Font Awesome Icon Search</h1>
+    
+    <div class="test-section">
+        <h2>Teste de Carregamento de Ícones</h2>
+        <div id="iconTest"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Teste de Cópia para Área de Transferência</h2>
+        <button onclick="testCopy()">Testar Cópia</button>
+        <div id="copyTest"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Teste de LocalStorage</h2>
+        <button onclick="testLocalStorage()">Testar LocalStorage</button>
+        <div id="localStorageTest"></div>
+    </div>
+
+    <script src="js/icons.js"></script>
+    <script>
+        // Teste de carregamento de ícones
+        function testIconLoading() {
+            const testDiv = document.getElementById('iconTest');
+            
+            if (window.fontAwesomeIcons && window.fontAwesomeIcons.length > 0) {
+                testDiv.innerHTML = `
+                    <div class="test-result success">✅ Ícones carregados com sucesso!</div>
+                    <div class="test-result">Total de ícones: ${window.fontAwesomeIcons.length}</div>
+                    <div class="test-result">Primeiro ícone: ${window.fontAwesomeIcons[0].name} (${window.fontAwesomeIcons[0].class})</div>
+                `;
+            } else {
+                testDiv.innerHTML = '<div class="test-result error">❌ Ícones não carregados</div>';
+            }
+        }
+
+        // Teste de cópia
+        function testCopy() {
+            const testDiv = document.getElementById('copyTest');
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText('<i class="fas fa-test"></i>')
+                    .then(() => {
+                        testDiv.innerHTML = '<div class="test-result success">✅ API de área de transferência disponível</div>';
+                    })
+                    .catch(err => {
+                        testDiv.innerHTML = '<div class="test-result error">❌ Erro ao copiar: ' + err.message + '</div>';
+                    });
+            } else {
+                testDiv.innerHTML = '<div class="test-result error">❌ API de área de transferência não disponível</div>';
+            }
+        }
+
+        // Teste de LocalStorage
+        function testLocalStorage() {
+            const testDiv = document.getElementById('localStorageTest');
+            
+            try {
+                localStorage.setItem('test', 'value');
+                const value = localStorage.getItem('test');
+                localStorage.removeItem('test');
+                
+                if (value === 'value') {
+                    testDiv.innerHTML = '<div class="test-result success">✅ LocalStorage funcionando corretamente</div>';
+                } else {
+                    testDiv.innerHTML = '<div class="test-result error">❌ LocalStorage não está funcionando corretamente</div>';
+                }
+            } catch (err) {
+                testDiv.innerHTML = '<div class="test-result error">❌ Erro no LocalStorage: ' + err.message + '</div>';
+            }
+        }
+
+        // Executar teste de ícones ao carregar
+        document.addEventListener('DOMContentLoaded', testIconLoading);
+    </script>
+</body>
+</html>

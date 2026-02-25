@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pesquisador de ícones Font Awesome - Encontre e copie códigos de ícones facilmente">
+    <meta name="keywords" content="font awesome, ícones, pesquisa, códigos html, web design">
+    <meta property="og:title" content="Font Awesome Icon Search">
+    <meta property="og:description" content="Encontre ícones Font Awesome com seus códigos HTML">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#1e40af">
+    
+    <title>Font Awesome Icon Search - Pesquisador de Ícones</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Font Awesome Icon Search",
+        "description": "Pesquisador de ícones Font Awesome com códigos HTML",
+        "url": "https://fontawesome-search.vercel.app",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Web"
+    }
+    </script>
+</head>
+<body>
+    <header class="header" role="banner">
+        <nav class="nav" role="navigation" aria-label="Navegação principal">
+            <div class="nav__container">
+                <h1 class="nav__logo">
+                    <i class="fas fa-icons" aria-hidden="true"></i>
+                    <span>Font Awesome Search</span>
+                </h1>
+                <div class="nav__theme-toggle">
+                    <button class="theme-toggle__btn" id="themeToggle" aria-label="Alternar tema">
+                        <i class="fas fa-sun" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main" role="main">
+        <section class="hero" aria-label="Pesquisa de ícones">
+            <div class="hero__container">
+                <h2 class="hero__title">Encontre o ícone perfeito</h2>
+                <p class="hero__subtitle">Pesquise entre milhares de ícones Font Awesome com seus códigos HTML</p>
+                
+                <div class="search-container">
+                    <div class="search__box">
+                        <i class="fas fa-search search__icon" aria-hidden="true"></i>
+                        <input 
+                            type="search" 
+                            class="search__input" 
+                            id="searchInput"
+                            placeholder="Digite o nome do ícone... (ex: home, user, heart)"
+                            autocomplete="off"
+                            aria-label="Pesquisar ícones"
+                        >
+                        <button class="search__clear" id="clearSearch" aria-label="Limpar pesquisa">
+                            <i class="fas fa-times" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="search__results-info" id="resultsInfo" aria-live="polite"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="icons" aria-label="Ícones Font Awesome">
+            <div class="icons__container">
+                <div class="icons__controls">
+                    <div class="view-toggle">
+                        <button class="view-toggle__btn view-toggle__btn--grid active" data-view="grid" aria-label="Visualização em grade">
+                            <i class="fas fa-th" aria-hidden="true"></i>
+                        </button>
+                        <button class="view-toggle__btn view-toggle__btn--list" data-view="list" aria-label="Visualização em lista">
+                            <i class="fas fa-list" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="sort-controls">
+                        <label for="sortSelect" class="sort__label">Ordenar por:</label>
+                        <select class="sort__select" id="sortSelect" aria-label="Ordenar ícones">
+                            <option value="name">Nome (A-Z)</option>
+                            <option value="category">Categoria</option>
+                            <option value="popularity">Popularidade</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="icons__grid" id="iconsGrid" role="region" aria-label="Grade de ícones">
+                    <!-- Ícones serão inseridos aqui via JavaScript -->
+                </div>
+
+                <div class="loading" id="loading" aria-hidden="true">
+                    <div class="loading__spinner"></div>
+                    <p class="loading__text">Carregando ícones...</p>
+                </div>
+
+                <div class="no-results" id="noResults" hidden>
+                    <i class="fas fa-search no-results__icon" aria-hidden="true"></i>
+                    <h3 class="no-results__title">Nenhum ícone encontrado</h3>
+                    <p class="no-results__text">Tente pesquisar com termos diferentes ou verifique a ortografia.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+        <div class="footer__container">
+            <div class="footer__info">
+                <h3 class="footer__title">Font Awesome Search</h3>
+                <p class="footer__description">Ferramenta para pesquisar e descobrir ícones Font Awesome</p>
+            </div>
+            
+            <div class="footer__stats">
+                <div class="stat">
+                    <span class="stat__number" id="totalIcons">0</span>
+                    <span class="stat__label">Ícones disponíveis</span>
+                </div>
+                <div class="stat">
+                    <span class="stat__number" id="categoriesCount">0</span>
+                    <span class="stat__label">Categorias</span>
+                </div>
+            </div>
+            
+            <div class="footer__links">
+                <a href="https://fontawesome.com" target="_blank" rel="noopener noreferrer" class="footer__link">
+                    <i class="fab fa-font-awesome" aria-hidden="true"></i>
+                    Font Awesome
+                </a>
+                <a href="https://github.com/FortAwesome/Font-Awesome" target="_blank" rel="noopener noreferrer" class="footer__link">
+                    <i class="fab fa-github" aria-hidden="true"></i>
+                    GitHub
+                </a>
+            </div>
+        </div>
+        
+        <div class="footer__bottom">
+            <p class="footer__copyright">&copy; 2024 Font Awesome Search. Desenvolvido com <i class="fas fa-heart" aria-hidden="true"></i> e Font Awesome</p>
+        </div>
+    </footer>
+
+    <div class="toast" id="toast" role="status" aria-live="polite">
+        <div class="toast__content">
+            <i class="toast__icon" aria-hidden="true"></i>
+            <span class="toast__message"></span>
+        </div>
+    </div>
+
+    <script src="js/icons.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

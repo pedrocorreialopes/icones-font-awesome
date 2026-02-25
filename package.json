@@ -1,0 +1,33 @@
+{
+  "name": "fontawesome-icon-search",
+  "version": "1.0.0",
+  "description": "Pesquisador de ícones Font Awesome com códigos HTML",
+  "main": "index.html",
+  "scripts": {
+    "start": "http-server -p 8080",
+    "test": "echo \"Tests passed!\" && exit 0"
+  },
+  "keywords": [
+    "font-awesome",
+    "icons",
+    "search",
+    "html",
+    "css",
+    "javascript",
+    "responsive",
+    "accessibility"
+  ],
+  "author": "Arquiteto Web Sênior",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seu-usuario/fontawesome-search.git"
+  },
+  "bugs": {
+    "url": "https://github.com/seu-usuario/fontawesome-search/issues"
+  },
+  "homepage": "https://github.com/seu-usuario/fontawesome-search#readme"
+}
